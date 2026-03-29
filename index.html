@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsuraLens — AI-Powered Health Insurance Analyzer</title>
+    <meta name="description"
+        content="Compare Indian Health Insurance Plans honestly. See real premiums, what's covered, what's hidden, and what they won't tell you.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ======== WELCOME MODAL (shows on first visit) ======== -->
+    <div id="welcome-modal" class="welcome-overlay">
+        <div class="welcome-card">
+            <div class="welcome-icon">🛡️</div>
+            <h2 class="welcome-title">Welcome to <span class="logo-accent">InsuraLens</span></h2>
+            <div class="welcome-warning">
+                <span class="warning-icon">⚠️</span>
+                <div>
+                    <strong>Important Disclaimer</strong>
+                    <p>This tool is for <strong>coverage comparison and educational purposes only</strong>. Actual
+                        premiums may differ — always verify on the official insurance provider's website before
+                        purchasing. We do NOT sell insurance.</p>
+                </div>
+            </div>
+            <div class="welcome-story">
+                <h3>📖 Why I Built This</h3>
+                <p>Hi, I'm <strong>Bharathkannan</strong>. Like many of you, I once searched for health insurance
+                    online. Within minutes, my phone was flooded with <strong>20+ spam calls</strong> from agents — all
+                    trying to sell me something I barely understood.</p>
+                <p>I realized the problem: <em>there's no place to genuinely compare plans without giving away your data
+                        to brokers</em>. Every portal sells your details to insurance agents the moment you enter your
+                    phone number.</p>
+                <p>So I built <strong>InsuraLens</strong> — a tool that lets you <strong>see what's really covered,
+                        what's hidden in fine print, and what gets rejected during claims</strong> — without a single
+                    spam call. Your data stays on your device. No agents. No pressure.</p>
+                <p>I hope this helps you make a better decision. Stay informed, stay protected. 💙</p>
+                <div class="story-author">— Bharathkannan (rbkannan)</div>
+            </div>
+            <button id="welcome-dismiss" class="btn-primary welcome-btn">I Understand — Let's Compare Plans</button>
+        </div>
+    </div>
+
+    <!-- DISCLAIMER BANNER -->
+    <div class="disclaimer-banner">
+        <div class="container">
+            <span>⚠️</span> This tool is for <strong>coverage comparison only</strong>. Actual premiums may vary —
+            always verify on the official insurance provider's website.
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <div class="logo-glow"></div>
+                <span class="logo-icon">🛡️</span>
+                <div>
+                    <h1>Insura<span class="logo-accent">Lens</span></h1>
+                    <span class="logo-tag">AI-Powered Insurance Analyzer</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-badge"><span class="badge-dot"></span> IRDAI Data FY 2024-25</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO / MULTI-STEP FORM -->
+    <section class="search-section">
+        <div class="container">
+            <div class="hero-text">
+                <h2 class="hero-title">Compare Health Insurance Plans<br><span class="hero-gradient">The Way You
+                        Should.</span></h2>
+                <p class="hero-sub">No marketing fluff. See what's <strong>really covered</strong>, what <strong>they
+                        hide</strong>, and what <strong>gets rejected in claims</strong>.</p>
+            </div>
+            <div class="search-card">
+                <!-- PROGRESS BAR -->
+                <div class="step-progress">
+                    <div class="step-indicator active" data-step="1"><span class="step-num">1</span><span
+                            class="step-label">Your Details</span></div>
+                    <div class="step-line">
+                        <div class="step-line-fill"></div>
+                    </div>
+                    <div class="step-indicator" data-step="2"><span class="step-num">2</span><span
+                            class="step-label">Family</span></div>
+                    <div class="step-line">
+                        <div class="step-line-fill"></div>
+                    </div>
+                    <div class="step-indicator" data-step="3"><span class="step-num">3</span><span
+                            class="step-label">Cover & Compare</span></div>
+                </div>
+                <!-- STEP 1 -->
+                <div class="form-step active" id="step-1">
+                    <h3 class="step-title">👤 Tell us about yourself</h3>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="self-name">Full Name</label><input type="text"
+                                id="self-name" placeholder="e.g. Bharathkannan" autocomplete="name"></div>
+                        <div class="form-group"><label for="self-phone">Phone Number</label><input type="tel"
+                                id="self-phone" placeholder="e.g. 9876543210" maxlength="10" pattern="[0-9]{10}"></div>
+                        <div class="form-group"><label for="self-dob">Date of Birth</label><input type="date"
+                                id="self-dob"></div>
+                        <div class="form-group"><label for="self-gender">Gender</label><select id="self-gender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select></div>
+                        <div class="form-group"><label for="self-pincode">Pincode</label><input type="text"
+                                id="self-pincode" placeholder="e.g. 400001" maxlength="6" pattern="[0-9]{6}"><span
+                                class="pincode-city" id="pincode-city"></span></div>
+                    </div>
+                    <div class="form-group full-width"><label>Pre-existing Diseases <span class="optional-tag">if
+                                any</span></label>
+                        <div class="ped-selector" id="self-ped-selector"></div>
+                    </div>
+                    <div id="step1-error" class="error-msg" style="display:none;"></div>
+                    <div class="step-actions"><button class="btn-primary" id="btn-next-1">Next: Add Family <span
+                                class="btn-arrow">→</span></button></div>
+                </div>
+                <!-- STEP 2 -->
+                <div class="form-step" id="step-2">
+                    <h3 class="step-title">👨‍👩‍👧‍👦 Add Family Members</h3>
+                    <p class="step-desc">Add anyone you want covered. Family Floater covers everyone under one sum
+                        insured.</p>
+                    <div id="family-members-list"></div>
+                    <button class="btn-add-member" id="btn-add-member"><span>➕</span> Add Family Member</button>
+                    <div id="add-member-form" class="add-member-form" style="display:none;">
+                        <h4>Add New Member</h4>
+                        <div class="form-grid">
+                            <div class="form-group"><label for="member-relation">Relationship</label><select
+                                    id="member-relation">
+                                    <option value="">Select</option>
+                                    <option value="spouse">Spouse</option>
+                                    <option value="son">Son</option>
+                                    <option value="daughter">Daughter</option>
+                                    <option value="father">Father</option>
+                                    <option value="mother">Mother</option>
+                                    <option value="father-in-law">Father-in-Law</option>
+                                    <option value="mother-in-law">Mother-in-Law</option>
+                                </select></div>
+                            <div class="form-group"><label for="member-name">Name</label><input type="text"
+                                    id="member-name" placeholder="Full Name"></div>
+                            <div class="form-group"><label for="member-dob">Date of Birth</label><input type="date"
+                                    id="member-dob"></div>
+                            <div class="form-group"><label for="member-gender">Gender</label><select id="member-gender">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select></div>
+                        </div>
+                        <div class="form-group full-width"><label>Pre-existing Diseases</label>
+                            <div class="ped-selector" id="member-ped-selector"></div>
+                        </div>
+                        <div id="member-error" class="error-msg" style="display:none;"></div>
+                        <div class="member-form-actions"><button class="btn-ghost"
+                                id="btn-cancel-member">Cancel</button><button class="btn-primary btn-sm"
+                                id="btn-save-member">✓ Add Member</button></div>
+                    </div>
+                    <div class="step-actions step-actions-split">
+                        <button class="btn-ghost" id="btn-back-2">← Back</button>
+                        <button class="btn-primary" id="btn-next-2">Next: Choose Cover <span
+                                class="btn-arrow">→</span></button>
+                    </div>
+                </div>
+                <!-- STEP 3 -->
+                <div class="form-step" id="step-3">
+                    <h3 class="step-title">🛡️ Choose Your Coverage</h3>
+                    <div id="members-summary"></div>
+                    <div class="form-grid cover-grid">
+                        <div class="form-group"><label for="cover-input">Sum Insured</label><select id="cover-input">
+                                <option value="500000">₹5 Lakhs</option>
+                                <option value="1000000">₹10 Lakhs</option>
+                                <option value="2000000">₹20 Lakhs</option>
+                                <option value="5000000" selected>₹50 Lakhs</option>
+                                <option value="10000000">₹1 Crore</option>
+                                <option value="20000000">₹2 Crore</option>
+                            </select></div>
+                        <div class="form-group"><label for="plan-type">Plan Type</label><select id="plan-type">
+                                <option value="floater" selected>Family Floater</option>
+                                <option value="individual">Individual</option>
+                            </select></div>
+                        <div class="form-group"><label for="tenure-input">Policy Tenure</label><select
+                                id="tenure-input">
+                                <option value="1">1 Year</option>
+                                <option value="2">2 Years (7.5% off)</option>
+                                <option value="3">3 Years (10% off)</option>
+                            </select></div>
+                        <div class="form-group"><label>Payment Mode</label>
+                            <div class="toggle-group"><button class="toggle-btn active" data-mode="annual"
+                                    id="mode-annual">Annual</button><button class="toggle-btn" data-mode="monthly"
+                                    id="mode-monthly">Monthly (EMI)</button></div>
+                        </div>
+                    </div>
+                    <div class="step-actions step-actions-split">
+                        <button class="btn-ghost" id="btn-back-3">← Back</button>
+                        <button class="btn-primary btn-search" id="search-btn">🔎 Compare Plans & Get Premiums</button>
+                    </div>
+                </div>
+                <div id="search-error" class="error-msg" style="display:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results-section" class="results-section" style="display:none;">
+        <div class="container">
+            <div class="results-header">
+                <h2 id="results-title">Found Plans</h2>
+                <p class="results-subtitle">Select up to 3 plans for AI comparison, or click a plan name to explore
+                    details & chat with AI.</p>
+                <div class="results-controls">
+                    <span class="results-badge" id="tenure-badge">1 Year</span>
+                    <span class="results-badge" id="mode-badge">Annual Pay</span>
+                </div>
+            </div>
+            <div id="results-grid" class="results-grid"></div>
+        </div>
+    </section>
+
+    <!-- COMPARE BAR -->
+    <div id="compare-bar" class="compare-bar" style="display:none;">
+        <div class="container compare-bar-inner">
+            <div class="compare-info"><span id="compare-count">0</span> plans selected<span id="selected-names"
+                    class="selected-names"></span></div>
+            <button id="compare-btn" class="btn-compare"><span class="btn-icon">🤖</span> Compare with AI</button>
+        </div>
+    </div>
+
+    <!-- AI COMPARISON MODAL -->
+    <div id="ai-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2>🤖 AI Underwriter Analysis</h2>
+                    <p class="modal-subtitle">Unbiased comparison by an AI Health Insurance Expert</p>
+                </div><button id="modal-close" class="modal-close">&times;</button>
+            </div>
+            <div id="ai-loading" class="ai-loading" style="display:none;">
+                <div class="spinner"></div>
+                <p>Analyzing policy wordings... Reading fine print so you don't have to...</p>
+            </div>
+            <div id="ai-output" class="ai-output"></div>
+            <div class="modal-footer">
+                <p class="disclaimer">⚠️ For educational purposes only. Premiums are indicative — verify on official
+                    provider sites. Not affiliated with any insurer.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== PLAN DETAIL + AI CHAT MODAL ======== -->
+    <div id="plan-detail-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content plan-detail-content">
+            <div class="modal-header plan-detail-header">
+                <div>
+                    <h2 id="pd-plan-name">Plan Name</h2>
+                    <p id="pd-provider" class="modal-subtitle">Provider</p>
+                </div>
+                <button id="pd-close" class="modal-close">&times;</button>
+            </div>
+            <div class="plan-detail-body">
+                <!-- Left: Plan Info -->
+                <div class="pd-info-panel" id="pd-info-panel">
+                    <!-- Filled by JS -->
+                </div>
+                <!-- Right: AI Chat -->
+                <div class="pd-chat-panel">
+                    <div class="chat-header">
+                        <h3>💬 Ask AI About This Plan</h3>
+                        <p>AI answers from official policy wordings & IRDAI data</p>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-msg ai-msg">
+                            <div class="chat-avatar">🤖</div>
+                            <div class="chat-bubble">Hi! I'm your AI Insurance Advisor. Ask me anything about this plan
+                                — coverage, exclusions, claim process, fine print, or anything you're unsure about. I'll
+                                answer based on the official policy wordings.</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="e.g. Is diabetes covered after waiting period?"
+                            autocomplete="off">
+                        <button id="chat-send" class="btn-chat-send">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">🛡️ Insura<span>Lens</span></div>
+                <p>Built for transparency in Indian health insurance.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Data Sources</h4>
+                    <p>IRDAI Public Disclosures FY 2024-25</p>
+                    <p>Official Policy Wordings</p>
+                    <p>Provider Websites</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Disclaimer</h4>
+                    <p>Not affiliated with any insurer. Premiums are indicative — verify on provider sites. For
+                        educational purposes only.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built with ❤️ by <strong>Bharathkannan (rbkannan)</strong></p>
+                <p class="footer-year">© 2025 InsuraLens. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="premium-engine.js"></script>
+    <script src="plans-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
