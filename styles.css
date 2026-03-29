@@ -286,7 +286,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 @media(max-width:768px){
     .header-inner{flex-direction:column;gap:8px}
     .search-card{padding:20px}
-    .hero-title{font-size:26px}
+    .hero-title{font-size:24px}
+    .hero-sub{font-size:14px}
     .form-grid{grid-template-columns:1fr}
     .cover-grid{grid-template-columns:1fr 1fr}
     .results-grid{grid-template-columns:1fr}
@@ -295,14 +296,60 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
     .step-actions-split{flex-direction:column;gap:8px}
     .summary-header{flex-direction:column}
     .footer-links{grid-template-columns:1fr}
-    .plan-detail-body{flex-direction:column}
-    .pd-info-panel,.pd-chat-panel{max-height:50vh}
-    .welcome-card{margin:20px;padding:24px}
+    /* Welcome modal - mobile */
+    .welcome-overlay{padding:10px;align-items:flex-start}
+    .welcome-card{margin:10px;padding:20px;border-radius:14px;max-height:95vh;overflow-y:auto}
+    .welcome-icon{font-size:36px}
+    .welcome-title{font-size:20px;margin-bottom:14px}
+    .welcome-warning{flex-direction:column;gap:8px;padding:12px}
+    .welcome-warning strong{font-size:13px}
+    .welcome-warning p{font-size:12px}
+    .welcome-story{padding:14px}
+    .welcome-story h3{font-size:14px}
+    .welcome-story p{font-size:12px;line-height:1.6}
+    .welcome-btn{padding:14px;font-size:14px}
+    /* Plan detail modal - mobile */
+    .plan-detail-content{max-width:100%;margin:0}
+    .plan-detail-body{flex-direction:column;min-height:auto}
+    .pd-info-panel{max-height:none;border-right:none;border-bottom:1px solid var(--border);padding:16px}
+    .pd-chat-panel{width:100%;min-width:0;max-height:none}
+    .chat-messages{max-height:250px}
+    .pd-metrics{grid-template-columns:repeat(2,1fr)}
+    .pd-premium-val{font-size:20px}
+    .pd-actions{flex-direction:column}
+    /* AI Comparison modal - mobile */
+    .modal-overlay{padding:10px}
+    .modal-content{border-radius:12px;max-width:100%}
+    .modal-header{padding:16px;flex-direction:row}
+    .modal-header h2{font-size:16px}
+    .ai-output{padding:16px;font-size:13px}
+    .ai-output h2{font-size:16px;margin-top:20px}
+    .ai-output h3{font-size:14px}
+    .ai-output table{font-size:11px}
+    .ai-output table thead th{padding:6px 8px;font-size:10px}
+    .ai-output table tbody td{padding:6px 8px;font-size:11px}
+    .modal-footer{padding:12px 16px}
+    /* Disclaimer banner */
+    .disclaimer-banner{font-size:10px;padding:6px 10px;line-height:1.4}
+    /* Compare bar */
+    .btn-compare{padding:10px 20px;font-size:13px}
+    .card-footer{padding:10px 16px;gap:6px}
 }
 @media(max-width:480px){
     .ped-chip{font-size:10px;padding:4px 8px}
     .cover-grid{grid-template-columns:1fr}
-    .hero-title{font-size:22px}
+    .hero-title{font-size:20px}
+    .step-progress{gap:0}
+    .step-label{font-size:8px}
+    .step-num{width:30px;height:30px;font-size:12px}
+    .card-plan-name{font-size:14px}
+    .metric-value{font-size:14px}
+    .premium-value{font-size:16px}
+    .pd-metrics{grid-template-columns:repeat(2,1fr);gap:4px}
+    .pd-metric{padding:6px}
+    .chat-bubble{font-size:12px;padding:8px 10px}
+    .ai-output{padding:12px}
+    .ai-output table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 }
 
 /* === WELCOME MODAL === */
