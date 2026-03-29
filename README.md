@@ -16,19 +16,12 @@ The purpose of InsuraLens is to simplify the insurance purchasing experience, en
 ## How It Works
 InsuraLens connects customers with the insurance data they need in real-time while allowing agents to manage their policies efficiently from a centralized platform. The application uses advanced algorithms to fetch and display the most relevant insurance options based on user input and preferences.
 
-## Tech Stack
-- **Frontend:** React.js
-- **Backend:** Node.js, Express
-- **Database:** MongoDB
-- **Deployment:** Docker, Kubernetes
-- **Cloud Service:** AWS
 
 ## Installation
 To install InsuraLens, follow these steps:
 1. Clone the repository: `git clone https://github.com/bharathkannandeveloper/insuralens.git`
 2. Navigate to the project folder: `cd insuralens`
-3. Install dependencies: `npm install`
-4. Run the application: `npm start`
+4. Run the application - open on browser: `index.html`
 
 ## Usage
 Once the application is running, users can create an account, log in, and start managing their insurance policies. Agents can register and access additional features to manage clients and policies.
